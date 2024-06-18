@@ -1,15 +1,19 @@
-apiVersion: route.openshift.io/v1
-kind: Route
+
+kind: Ingress
+apiVersion: networking.k8s.io/v1
 metadata:
-  labels:
-    app: spring-petclinic
   name: spring-petclinic
   annotations:
     route.openshift.io/termination: edge
 spec:
-  port:
-    targetPort: 8080-tcp
-  to:
-    kind: Service
-    name: spring-petclinic
-    weight: 100
+  rules:
+    - host: petclinic.apps.sbx.gn2.ssc-ict.rijksapps.nl
+      http:
+        paths:
+          - backend:
+              service:
+                name: spring-petclinic
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
