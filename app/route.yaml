@@ -4,6 +4,8 @@ metadata:
   labels:
     app: spring-petclinic
   name: spring-petclinic
+  annotations:
+    route.openshift.io/termination: edge
 spec:
   port:
     targetPort: 8080-tcp
